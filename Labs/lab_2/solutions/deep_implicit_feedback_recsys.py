@@ -34,7 +34,7 @@ def build_models(n_users, n_items, user_dim=32, item_dim=64,
     l2_reg = None if l2_reg == 0 else l2(l2_reg)
     user_layer = Embedding(n_users, user_dim, input_length=1,
                            name='user_embedding', W_regularizer=l2_reg)
-    
+
     # The following embedding parameters will be shared to encode both
     # the positive and negative items.
     item_layer = Embedding(n_items, item_dim, input_length=1,
@@ -44,7 +44,7 @@ def build_models(n_users, n_items, user_dim=32, item_dim=64,
     positive_item_embedding = Flatten()(item_layer(positive_item_input))
     negative_item_embedding = Flatten()(item_layer(negative_item_input))
 
-        
+
     # Similarity computation between embeddings using a MLP similarity
     positive_embeddings_pair = merge([user_embedding, positive_item_embedding],
                                      mode='concat',
@@ -54,7 +54,7 @@ def build_models(n_users, n_items, user_dim=32, item_dim=64,
                                      mode='concat',
                                      name="negative_embeddings_pair")
     negative_embeddings_pair = Dropout(dropout)(negative_embeddings_pair)
-    
+
     # Instanciate the shared similarity architecture
     interaction_layers = make_interaction_mlp(
         user_dim + item_dim, n_hidden=n_hidden, hidden_size=hidden_size,
@@ -72,11 +72,11 @@ def build_models(n_users, n_items, user_dim=32, item_dim=64,
                                       positive_item_input,
                                       negative_item_input],
                                output=triplet_loss)
-    
+
     # The match-score model, only used at inference
     deep_match_model = Model(input=[user_input, positive_item_input],
                              output=positive_similarity)
-    
+
     return deep_match_model, deep_triplet_model
 
 
@@ -92,7 +92,7 @@ deep_match_model, deep_triplet_model = build_models(n_users, n_items,
                                                     **hyper_parameters)
 
 
-deep_triplet_model.compile(loss=identity_loss, optimizer=Adam())
+deep_triplet_model.compile(loss=identity_loss, optimizer='adam')
 fake_y = np.ones_like(pos_data_train['user_id'])
 
 n_epochs = 15
@@ -106,7 +106,7 @@ for i in range(n_epochs):
     # sampled triplets.
     deep_triplet_model.fit(triplet_inputs, fake_y, shuffle=True,
                            batch_size=64, nb_epoch=1)
-    
+
     # Monitor the convergence of the model
     test_auc = average_roc_auc(deep_match_model, pos_data_train, pos_data_test)
     print("Epoch %d/%d: test ROC AUC: %0.4f"
