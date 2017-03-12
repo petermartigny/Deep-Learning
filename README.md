@@ -14,7 +14,7 @@ Regularization, Ethical Considerations
 #### Class 3 - ConvNet 1
 Convolution, padding, stride, CNN architectures
 Image classification
-For good intuitions of what convolutions, padding, strides are doing on images, check this [repository](https://github.com/vdumoulin/conv_arithmetic) from V.
+For good intuitions of what convolutions, padding, strides are doing on images, check this [repository](https://github.com/vdumoulin/conv_arithmetic) from V. Dumoulin
 
 #### Class 4 - ConvNet 2
 Image classification and localization, Image segmentation
