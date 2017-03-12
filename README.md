@@ -16,4 +16,11 @@ Convolution, padding, stride, CNN architectures
 Image classification
 For good intuitions of what convolutions, padding, strides are doing on images, check this [repository](https://github.com/vdumoulin/conv_arithmetic) from V.
 
+#### Class 4 - ConvNet 2
+Image classification and localization, Image segmentation
+
+#### Class 5 - Deep Learning for NLP
+Word2Vec, RNN
+
+#### Class 6 - Optimization
 
