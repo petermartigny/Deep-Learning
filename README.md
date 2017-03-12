@@ -11,4 +11,9 @@ Explicit RecSys: Deep RecSys with or without metadata
 Implicit RecSys: Deep Triplet Network
 Regularization, Ethical Considerations
 
+#### Class 3 - ConvNet 1
+Convolution, padding, stride, CNN architectures
+Image classification
+For good intuitions of what convolutions, padding, strides are doing on images check this [repository](https://github.com/vdumoulin/conv_arithmetic)
+
 
